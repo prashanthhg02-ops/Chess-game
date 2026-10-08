@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#111714">
+    <meta name="description" content="A quiet little chess room. Play a thoughtful game, one move at a time.">
+    <title>Quiet Knight — Chess</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="game.js" defer></script>
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="#" aria-label="Quiet Knight home">
+          <span class="brand-mark" aria-hidden="true">♞</span>
+          <span>quiet<span class="brand-light">knight</span></span>
+        </a>
+        <div class="topbar-note"><span class="online-dot"></span> YOUR LITTLE CHESS ROOM</div>
+        <button class="icon-button sound-button" id="sound-toggle" type="button" aria-label="Toggle sound" title="Toggle sound">♫</button>
+      </header>
+
+      <section class="game-layout" aria-label="Chess game">
+        <div class="board-column">
+          <div class="player-card opponent-card" id="black-player">
+            <div class="player-avatar black-avatar" aria-hidden="true">♚</div>
+            <div class="player-details">
+              <strong>Black</strong>
+              <span class="player-caption">Ready when you are</span>
+            </div>
+            <div class="captured-pieces" id="black-captured" aria-label="Black captured pieces"></div>
+            <div class="clock" id="black-clock">10:00</div>
+          </div>
+
+          <div class="board-frame">
+            <div class="board-coordinates rank-labels" id="rank-labels" aria-hidden="true"></div>
+            <div class="chessboard" id="chessboard" role="grid" aria-label="Chess board"></div>
+            <div class="board-coordinates file-labels" id="file-labels" aria-hidden="true"></div>
+          </div>
+
+          <div class="player-card you-card" id="white-player">
+            <div class="player-avatar white-avatar" aria-hidden="true">♔</div>
+            <div class="player-details">
+              <strong>You <span class="you-tag">YOU</span></strong>
+              <span class="player-caption" id="white-caption">Your move. Make it count.</span>
+            </div>
+            <div class="captured-pieces" id="white-captured" aria-label="White captured pieces"></div>
+            <div class="clock active-clock" id="white-clock">10:00</div>
+          </div>
+        </div>
+
+        <aside class="game-panel">
+          <div class="panel-heading">
+            <span class="eyebrow">THE BOARD IS YOURS</span>
+            <h1>A game of<br><em>good moves.</em></h1>
+            <p class="panel-intro">Take your time. The best move is the one you believe in.</p>
+          </div>
+
+          <div class="turn-indicator" id="turn-indicator">
+            <span class="turn-dot"></span>
+            <span id="turn-text">White to move</span>
+            <span class="turn-separator">·</span>
+            <span id="move-count">Move 1</span>
+          </div>
+
+          <section class="moves-section" aria-label="Move history">
+            <div class="section-title"><span>MOVE HISTORY</span><span class="history-icon">↕</span></div>
+            <div class="move-list" id="move-list">
+              <div class="empty-history"><span>♙</span><p>Your story starts<br>with a single move.</p></div>
+            </div>
+          </section>
+
+          <div class="game-controls">
+            <button class="control-button primary-button" id="new-game" type="button"><span>＋</span> New game</button>
+            <div class="secondary-controls">
+              <button class="control-button" id="undo-move" type="button" disabled><span>↶</span> Undo</button>
+              <button class="control-button" id="flip-board" type="button"><span>⇅</span> Flip board</button>
+            </div>
+          </div>
+          <div class="panel-footer"><span>♙</span> MADE FOR THE LOVE OF THE GAME</div>
+        </aside>
+      </section>
+      <footer class="mobile-footer">A good game is always worth the time.</footer>
+    </main>
+
+    <dialog class="promotion-dialog" id="promotion-dialog" aria-labelledby="promotion-title">
+      <form method="dialog">
+        <span class="eyebrow">A PAWN REACHES THE END</span>
+        <h2 id="promotion-title">Choose your piece</h2>
+        <div class="promotion-options" id="promotion-options"></div>
+      </form>
+    </dialog>
+    <dialog class="confirm-dialog" id="new-game-dialog">
+      <form method="dialog">
+        <span class="eyebrow">A FRESH BEGINNING</span>
+        <h2>Start a new game?</h2>
+        <p>Your current game will be cleared.</p>
+        <div class="dialog-actions">
+          <button class="control-button" value="cancel">Keep playing</button>
+          <button class="control-button primary-button" value="new">New game</button>
+        </div>
+      </form>
+    </dialog>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>
